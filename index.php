@@ -1,5 +1,6 @@
 <?php
 use core\components\Url;
+use core\exceptions\NotFoundHttpException;
 
 function __autoload($class)
 {
@@ -21,6 +22,21 @@ if (is_null($action)) {
     $action = 'action' . ucfirst(strtolower($action));
 }
 
-$controller = new $controller();
-$output = $controller->$action;
-echo $output;
+try {
+    if (!file_exists('app/controllers/' . $controller . '.php')) {
+        throw new NotFoundHttpException('Page not Found');
+    }
+    $controller = 'app\controllers\\' . $controller . '.php';
+    $controller = new $controller();
+    if (method_exists($controller, $action)) {
+        throw new NotFoundHttpException('Page not Found');
+    }
+    $output = $controller->$action();
+    echo $output;
+} catch (NotFoundHttpException $e) {
+    header('HTTP/1.1 404 Not Found');
+    echo $e->getMessage();
+
+} catch (Exception $e) {
+    echo 'Error' . $e->getMessage();
+}
