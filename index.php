@@ -26,7 +26,7 @@ try {
     if (!file_exists('app/controllers/' . $controller . '.php')) {
         throw new NotFoundHttpException('Page not Found');
     }
-    $controller = 'app\controllers\\' . $controller . '.php';
+    $controller = 'app\controllers\\' . $controller;
     $controller = new $controller();
     if (method_exists($controller, $action)) {
         throw new NotFoundHttpException('Page not Found');

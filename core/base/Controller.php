@@ -9,7 +9,7 @@ abstract class Controller
 
     public function __construct()
     {
-        $this->$this->_view = new View();
+        $this->_view = new View();
     }
 
     abstract public function actionIndex();
