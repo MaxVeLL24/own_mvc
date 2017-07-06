@@ -24,17 +24,17 @@ if (!is_null($action)) {
 try {
     if (file_exists('app/controllers/' . $controller . '.php')) {
         $controller = 'app\controllers\\' . $controller;
-        $controller = new $controllers();
+        $controller = new $controller();
         if (method_exists($controller, $action)) {
-            $controller->$action();
+            $out = $controller->$action();
         } else {
-            throw new Exception;
+            throw new Exception('404');
         }
     } else {
-        throw new Exception;
+        throw new Exception('404');
     }
 
 } catch (Exception $e) {
     $e->getMessage();
-    $e->getCode();
+
 }
