@@ -27,6 +27,7 @@ try {
         $controller = new $controller();
         if (method_exists($controller, $action)) {
             $out = $controller->$action();
+            echo $out;
         } else {
             throw new Exception('404');
         }
