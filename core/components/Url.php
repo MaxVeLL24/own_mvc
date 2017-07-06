@@ -2,45 +2,29 @@
 
 namespace core\components;
 
-
 class Url
 {
-    /**
-     * @param integer $n
-     * @return string | null
-     */
-    static public function getRouteSegment($n)
+    static public function GetSegment($n)
     {
-        $segments = self::getRouteSegments()[$n];
-        if (!empty($segments[$n])) {
-            return $segments[$n];
+        $routes = self::GetSegments();
+        if (empty($routes)) {
+            return null;
+        } else {
+            return $routes[$n];
         }
-        return null;
     }
 
-    /**
-     * @return array
-     */
-    static public function getRouteSegments()
+    static public function GetSegments()
     {
-        $url = $_GET['r'];
-        $segment = explode('/', $url);
-        if (empty($segment[0])) {
+        $routsGet = $_GET['r'];
+        $routs = explode('/', $routsGet);
+        if (empty($routs[0])) {
             return [];
         }
-        $lastindex = count($segment) - 1;
-        if (empty($segment[$lastindex])) {
-            array_pop($segment);
+        if (empty($routs[count($routs) - 1])) {
+            array_pop($routs);
         }
-        return $segment;
+        return $routs;
     }
 
-    /**
-     * @param  string $param
-     * @return string null
-     */
-    static public function getParam($param)
-    {
-        return isset($_GET[$param]) ? $_GET[$param] : null;
-    }
 }

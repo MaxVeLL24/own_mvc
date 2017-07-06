@@ -2,12 +2,8 @@
 
 namespace app\controllers;
 
-use core\base\Controller;
 
-class MainController extends Controller
+class MainController
 {
-    public function actionIndex()
-    {
-        return $this->render('home');
-    }
+    static $m=10;
 }
