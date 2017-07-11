@@ -1,5 +1,6 @@
 <?php
 use core\components\Url;
+use core\exceptions\newException;
 
 function __autoload($class)
 {
@@ -11,12 +12,12 @@ function __autoload($class)
 $controller = Url::GetSegment(0);
 $action = Url::GetSegment(1);
 
-if (!is_null($controller)) {
+if (is_null($controller)) {
     $controller = "MainController";
 } else {
     $controller = ucfirst(strtolower($controller)) . 'Controller';
 }
-if (!is_null($action)) {
+if (is_null($action)) {
     $action = "actionIndex";
 } else {
     $action = ucfirst(strtolower($action)) . 'Index';
@@ -29,13 +30,14 @@ try {
             $out = $controller->$action();
             echo $out;
         } else {
-            throw new Exception('404');
+            throw new newException('Page not found');
         }
     } else {
-        throw new Exception('404');
+        throw new Exception('Page not found');
     }
 
+} catch (newException $e) {
+    $e->getMessage();
 } catch (Exception $e) {
     $e->getMessage();
-
 }

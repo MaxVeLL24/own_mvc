@@ -1,7 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: student
- * Date: 06.07.2017
- * Time: 19:14
- */
+
+namespace core\base;
+
+
+abstract class Controller
+{
+    protected $_view;
+    public function __construct()
+    {
+        $this->_view = new View();
+    }
+    abstract public function actionIndex();
+    /**
+     * @param $tpl - string
+     * @param array $data
+     * @return mixed
+     */
+    public function render($tpl, $data = [])
+    {
+        return $this->_view->render($tpl, $data);
+    }
+}
