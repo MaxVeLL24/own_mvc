@@ -1,2 +1,6 @@
-<h1 style="font-family: <?= $font ?>">Hello <?= $first ?></h1>
-<h2 style="font-family: <?= $font ?>">Your job is <?= $second ?></h2>
+<?php
+$this->addCss('mystyle.css');
+?>
+
+<h1>Hello <?= $first ?></h1>
+<h2>Your job is <?= $second ?></h2>

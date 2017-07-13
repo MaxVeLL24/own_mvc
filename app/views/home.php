@@ -1,1 +1,5 @@
-<h1>Hello <?=$name ?></h1>
+<?php
+$this->addCss('style.css');
+$this->addJs();
+?>
+<h1>Hello <?= $name ?></h1>
